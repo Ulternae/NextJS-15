@@ -7,14 +7,19 @@ import { BookmarkType } from "./schema"
 import { useEffect, useState } from "react"
 
 export default function Bookmarks() {
+
   const [bookmarks, setBookmarks] = useState<BookmarkType[]>([])
+  const [status, setStatus] = useState<"loading" | "error" | "success" | "idle">("idle")
 
   useEffect(() => {
-
+    setStatus("loading")
     fetch("http://localhost:3000/bookmarks/api")
       .then((r) => r.json())
       .then(({ data }) => {
+        setStatus("success")
         setBookmarks(data)
+    }).catch(() => {
+      setStatus("error")
     })
 
   }, [])
