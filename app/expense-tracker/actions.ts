@@ -14,7 +14,7 @@ type Expense = {
 export async function getExpenses() {
   const result = await sql<Expense[]>`SELECT * FROM expenses ORDER BY date DESC`
   return result
-}
+} 
 
 // Add a new expense
 export async function addExpense(data: FormData) {
@@ -30,7 +30,7 @@ export async function addExpense(data: FormData) {
       (${name.toString()}, ${amount})
     `
 
-  revalidatePath("/expense-tracker")
+  revalidatePath("/expense-tracker")  // Revalidate the page to reflect the new expense
 }
 
 // Delete an expense
