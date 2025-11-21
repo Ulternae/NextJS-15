@@ -6,6 +6,7 @@ import { Heading, Text } from "@chakra-ui/react"
 import { Bookmark } from "@/components/bookmark"
 import { orm } from "../db"
 import { isInWhitelist } from "../utils/whitelist"
+import Loading from "./loading"
 
 export default async function Author({
   params,
@@ -20,7 +21,7 @@ export default async function Author({
     return null
   }
 
-  preload(author.id)
+  preload(author.id) // se precargan los marcadores del autor
 
   const isWhitelisted = await isInWhitelist(author)
 
@@ -55,9 +56,12 @@ export default async function Author({
       <Heading size="lg" className="mb-1 mt-14">
         Marcadores
       </Heading>
-      <Suspense fallback={<Fragment />}>
+      <Suspense fallback={<Loading />}>
         {isWhitelisted && <AuthorBookmarksById authorId={author.id} />}
       </Suspense>
+      {/* <Suspense fallback={<Fragment />}>
+        {isWhitelisted && <AuthorBookmarksById authorId={author.id} />}
+      </Suspense> */}
     </main>
   )
 }
