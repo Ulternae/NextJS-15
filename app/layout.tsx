@@ -2,6 +2,7 @@ import "./globals.css"
 
 import type { Metadata } from "next"
 import { PT_Serif } from "next/font/google"
+import Script from "next/script"
 
 import { Breadcrumb } from "@/components/breadcrumb"
 
@@ -28,6 +29,10 @@ export default async function RootLayout({
   return (
     <html lang="en" className={font.variable}>
       <body className="py-4 px-4 max-w-6xl mx-auto">
+        {process.env.NODE_ENV === "development" && (
+          <Script src="https://unpkg.com/react-scan/dist/auto.global.js" />
+        )}
+
         <Breadcrumb />
 
         <Providers>{children}</Providers>

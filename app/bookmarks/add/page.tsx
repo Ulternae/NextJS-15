@@ -40,7 +40,7 @@ export default function Bookmarks() {
         </FormControl>
 
         <Button disabled={pending} type="submit">
-          Agregar
+          {pending ? "..." : "Agregar"}
         </Button>
         {state?.error && (
           <div className="my-4 bg-red-300 px-6 py-4">{state.error}</div>

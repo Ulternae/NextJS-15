@@ -9,9 +9,11 @@ export async function addBookmark(prevState: unknown, data: FormData) {
 
   console.log("Adding bookmark:", { title, url })
 
+  throw new Error("Simulated server error for testing purposes.")
   const value = await orm.insert(bookmarks).values({ title, url }).returning()
 
   if (value.length <= 0) {
     return { error: "Fallo en agregar el marcador en la base de datos." }
   }
 }
+ 

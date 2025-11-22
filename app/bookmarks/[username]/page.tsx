@@ -1,4 +1,5 @@
-import { Fragment, Suspense } from "react"
+// import { Fragment, Suspense } from "react"
+import { Suspense } from "react"
 import Image from "next/image"
 
 import { Heading, Text } from "@chakra-ui/react"

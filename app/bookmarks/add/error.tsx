@@ -16,7 +16,7 @@ export default function Error({ error, reset }: Props) {
 
   return (
     <div>
-      <Heading className="mb-4">Oh noes! algo salió mal</Heading>
+      <Heading className="mb-4">Oh noes! algo salió mal FFF</Heading>
       <Button
         onClick={
           // Attempt to recover by trying to re-render the segment
