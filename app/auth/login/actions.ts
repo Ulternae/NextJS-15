@@ -7,7 +7,7 @@ import { redirect } from "next/navigation"
 // Hash de nuestro secreto usando
 // https://hash.online-convert.com/es/generador-sha256
 const SECRET =
-  "2037745262d46eddec63bd2381d1904359fc6b5736da1dcc50799d721a817a6f"
+  "8e382375c5f55eeb6a67c0de4c8706ece3677bdbe9f4ab3969021c3be36d77cf"
 
 export async function login(prevState: unknown, data: FormData) {
   const id = randomUUID()

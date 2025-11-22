@@ -17,7 +17,7 @@ export async function middleware(request: NextRequest) {
   // 1. Ignore todo lo que no sea de nuestra ruta /auth
   if (pathname.startsWith("/auth") && pathname !== "/auth/login") {
     const allCookies = await cookies()
-
+    console.log("All Cookies:", allCookies.getAll())
     // 2. Verificar si hay una cookie de sesión válida
     const hasSession = await isSessionValid(
       allCookies.get(SESSION_COOKIE_NAME)?.value,

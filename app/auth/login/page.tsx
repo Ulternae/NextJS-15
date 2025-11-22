@@ -22,6 +22,8 @@ export default function I18nPage() {
   const [state, action] = useActionState(login, { error: "" })
   const status = useFormStatus()
 
+  console.log({ state, action, status })
+
   return (
     <main className="">
       <header className="my-10">
