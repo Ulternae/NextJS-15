@@ -1,7 +1,9 @@
+"use cache"
 import { Heading, Text } from "@chakra-ui/react"
-
 import { getClient } from "./lib"
-
+import { unstable_cache as cache } from "next/cache"
+import { unstable_cacheLife as cacheLife } from "next/cache"
+import { cacheTag } from "next/dist/server/use-cache/cache-tag"
 // @see https://docs.launchdarkly.com/home/observability/contexts
 const context = {
   kind: "app-page",
@@ -9,9 +11,12 @@ const context = {
 }
 
 export const dynamic = "force-dynamic" // 'auto' | 'force-dynamic' | 'error' | 'force-static'
-// export const revalidate = 10 // false, Infinity, number
+export const revalidate = 10 // false, Infinity, number
 
 export default async function FeatureFlags() {
+  "use cache"
+  cacheTag("bookmarks")
+
   const client = await getClient()
   const variation = await client.variation("feature-new-color", context, false)
 

@@ -2,6 +2,7 @@
 
 import { bookmarks } from "../schema"
 import { orm } from "../db"
+import { revalidateTag } from "next/cache"
 
 export async function addBookmark(prevState: unknown, data: FormData) {
   const title = data.get("title") as string
@@ -9,8 +10,9 @@ export async function addBookmark(prevState: unknown, data: FormData) {
 
   console.log("Adding bookmark:", { title, url })
 
-  throw new Error("Simulated server error for testing purposes.")
   const value = await orm.insert(bookmarks).values({ title, url }).returning()
+
+  revalidateTag("bookmarks")
 
   if (value.length <= 0) {
     return { error: "Fallo en agregar el marcador en la base de datos." }
