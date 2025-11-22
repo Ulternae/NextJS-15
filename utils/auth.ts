@@ -1,7 +1,7 @@
 "server-only"
 
 import { cookies } from "next/headers"
-
+ 
 import { SignJWT, jwtVerify } from "jose"
 
 const secretKey = process.env.SESSION_SECRET
@@ -43,14 +43,15 @@ export const COOKIE_NAME = "__session__"
 
 export async function createSession(userId: string) {
   const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) // 7d
-  const session = await encrypt({ userId }, "7d")
+  const session = await encrypt({ userId }, "7d") // Informacion util pero no sensible
   const _cookies = await cookies()
 
   _cookies.set(COOKIE_NAME, session, {
     httpOnly: true,
-    secure: true,
+    secure: true, // HTTPS only / LOCALHOST only in development
     expires: expiresAt,
-    sameSite: "lax",
+    // sameSite: "lax", // dominios subdominios, otros
+    sameSite: "strict", // restringe al contexto y nuestro dominio
     path: "/",
   })
 }
@@ -68,6 +69,6 @@ export async function isSessionValid(
   }
 
   const session = await decrypt(cookieValue)
-
+  console.log("isSessionValid", { session, cookieValue })
   return Boolean(session)
 }
