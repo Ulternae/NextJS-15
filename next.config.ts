@@ -28,7 +28,6 @@ const getSentryConfig = () =>
     // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
 
     widenClientFileUpload: false,
-    hideSourceMaps: true,
     disableLogger: true,
     automaticVercelMonitors: false,
     sourcemaps: {
